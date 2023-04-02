@@ -4,9 +4,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,8 +18,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CategoryVi
 
     private List<CategoryModel> localCategorySet;
 
-    public CustomAdapter(List<CategoryModel> localCategorySet) {
+    private static OnItemClickListenerCategory itemClickListener;
+
+    public CustomAdapter(List<CategoryModel> localCategorySet, OnItemClickListenerCategory itemClickListener) {
         this.localCategorySet = localCategorySet;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -41,21 +46,30 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CategoryVi
 
         private final TextView name;
         private final ImageView image;
+        private final LinearLayout layout;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.category_name);
             image = itemView.findViewById(R.id.category_picture);
+
+            layout = itemView.findViewById(R.id.linear_layout);
         }
 
         public void bind(CategoryModel item) {
             name.setText(item.getName());
 
-           // Integer imageId = item.getImageId();
+            // Integer imageId = item.getImageId();
             //if (imageId != null) {
-                image.setImageDrawable(ContextCompat.getDrawable(image.getContext(), item.getImageId()));
-           // }
+            image.setImageDrawable(ContextCompat.getDrawable(image.getContext(), item.getImageId()));
+            // }
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    itemClickListener.onItemClick(item);
+                }
+            });
         }
     }
 }
