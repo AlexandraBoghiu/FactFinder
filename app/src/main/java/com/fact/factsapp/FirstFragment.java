@@ -1,47 +1,35 @@
 package com.fact.factsapp;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.fact.factsapp.databinding.FragmentFirstBinding;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirstFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
-
+    public static List<CategoryModel> categoryModelList = new ArrayList<>();
+    public FirstFragment() { super(R.layout.fragment_category_display);}
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-
-    }
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
-    }
+        initializeList();
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        CustomAdapter adapter = new CustomAdapter(categoryModelList);
+        RecyclerView rv = view.findViewById(R.id.recycler_view);
+        rv.setAdapter(adapter);
     }
-
+    private void initializeList(){
+        categoryModelList.add(new CategoryModel("Cats", R.drawable.cat));
+        categoryModelList.add(new CategoryModel("Dogs", R.drawable.dog));
+        categoryModelList.add(new CategoryModel("Numbers", R.drawable.numbers));
+        categoryModelList.add(new CategoryModel("Random", R.drawable.random));
+    }
 }
