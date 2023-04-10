@@ -10,4 +10,13 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="welcome_to_factsapp">Welcome to FactsApp</string>
+    <string name="hello">Hello! :)</string>
+    <string name="login">Login</string>
+    <string name="or">or</string>
+    <string name="register">Register</string>
+    <string name="loading">Loading...</string>
+    <string name="give_me_another_fact">Give me another fact</string>
+    <string name="categories">Categories</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
 </resources>

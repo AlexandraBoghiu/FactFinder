@@ -11,7 +11,7 @@
         android:layout_height="324dp"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
-        android:text="Loading..."
+        android:text="@string/loading"
         android:textSize="25sp" />
 
     <Button
@@ -21,7 +21,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="Give me another fact" />
+        android:text="@string/give_me_another_fact" />
 
 </LinearLayout>
 
