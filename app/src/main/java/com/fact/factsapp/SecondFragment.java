@@ -21,10 +21,25 @@ import androidx.fragment.app.Fragment;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SecondFragment extends Fragment {
 
     private Button notificationButton;
     private static String NOTIFICATION_CHANNEL_ID = "Notif channel";
+
+    private View view;
 
     public SecondFragment() {
         super(R.layout.fragment_second);
@@ -32,32 +47,67 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        this.view = view;
         createNotificationChannel();
-
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            CategoryModel model = bundle.getParcelable(CATEGORY);
-
-            ((TextView) view.findViewById(R.id.title)).setText(model.getName());
-        }
-
+        getFact();
         notificationButton = view.findViewById(R.id.btn);
         notificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addNotification();
+                getFact();
             }
         });
     }
 
-    private void addNotification() {
+    private void getFact() {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            CategoryModel model = bundle.getParcelable(CATEGORY);
+            String Url = "";
+            if (Objects.equals(model.getName(), "Cats")) {
+                Url = "https://catfact.ninja/";
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(Url)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                CatFactService service = retrofit.create(CatFactService.class);
+                CatFactTask task = new CatFactTask(service, new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response.isSuccessful()) {
+                            String catFact = response.body();
+                            System.out.println(catFact);
+                            ((TextView) view.findViewById(R.id.title)).setText(catFact);
+                            addNotification(catFact);
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+                task.execute();
+            }
+            if (Objects.equals(model.getName(), "Dogs")) {
+                Url = "https://dogapi.dog/api/v2/";
+            }
+            if (Objects.equals(model.getName(), "Numbers")) {
+                Url = "http://numbersapi.com/random/trivia/";
+            }
+            if (Objects.equals(model.getName(), "Random")) {
+                Url = "https://uselessfacts.jsph.pl/api/v2/facts/random/";
+            }
+        }
+    }
+
+    private void addNotification(String fact) {
         Intent intent = new Intent(getContext(), CategoriesActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         int id = 1;
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), NOTIFICATION_CHANNEL_ID).setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("FactsApp").setContentText("Get your daily dose of knowledge!").setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentTitle("FactsApp").setContentText(fact).setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent).setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());

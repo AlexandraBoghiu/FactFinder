@@ -7,4 +7,7 @@
     <string name="error_msg">Name field must be completed</string>
 
     <string name="lets_go">Let\'s go!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="welcome_to_factsapp">Welcome to FactsApp</string>
 </resources>

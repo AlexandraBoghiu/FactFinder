@@ -36,6 +36,7 @@ public class FirstFragment extends Fragment implements OnItemClickListenerCatego
         categoryModelList.add(new CategoryModel("Dogs", R.drawable.dog));
         categoryModelList.add(new CategoryModel("Numbers", R.drawable.numbers));
         categoryModelList.add(new CategoryModel("Random", R.drawable.random));
+        categoryModelList.add(new CategoryModel("", R.color.white));
     }
 
     @Override
@@ -51,7 +52,8 @@ public class FirstFragment extends Fragment implements OnItemClickListenerCatego
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.replace(R.id.fragment_container, secondFragment).addToBackStack(null);
+        fragmentTransaction.replace(R.id.frame_container, secondFragment).addToBackStack(null);
+//        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commit();
         fragmentTransaction.commit();
     }
 

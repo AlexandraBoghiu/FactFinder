@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linear_layout"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_marginBottom="10dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/category_picture"
-        android:layout_width="124dp"
-        android:layout_height="80dp"
-        android:src="@drawable/cat" />
+        <ImageView
+            android:id="@+id/category_picture"
+            android:layout_width="124dp"
+            android:layout_height="80dp"
+            android:src="@drawable/cat" />
 
-    <TextView
-        android:id="@+id/category_name"
-        android:layout_width="275dp"
-        android:layout_height="80dp"
-        android:textSize="50sp"
-        tools:text="Cats" />
-
+        <TextView
+            android:id="@+id/category_name"
+            android:layout_width="275dp"
+            android:layout_height="80dp"
+            android:textSize="50sp"
+            tools:text="Cats" />
 </LinearLayout>
