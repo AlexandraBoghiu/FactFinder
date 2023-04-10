@@ -2,10 +2,7 @@ package com.fact.factsapp;
 
 import android.os.AsyncTask;
 
-import java.nio.channels.AsynchronousChannelGroup;
-
 public class FindUserOperationRegister extends AsyncTask<String, Void, User> {
-
     UserOperations listener;
 
     public FindUserOperationRegister(UserOperations listener) {

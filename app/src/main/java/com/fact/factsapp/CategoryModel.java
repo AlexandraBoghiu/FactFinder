@@ -13,8 +13,6 @@ public class CategoryModel implements Parcelable {
         this.name = name;
         this.imageId = imageId;
     }
-
-
     public String getName() {
         return name;
     }
@@ -31,7 +29,6 @@ public class CategoryModel implements Parcelable {
         this.name = name;
         this.imageId = imageId;
     }
-
 
     @Override
     public int describeContents() {
@@ -52,12 +49,10 @@ public class CategoryModel implements Parcelable {
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-
         @Override
         public Object createFromParcel(Parcel parcel) {
             return new CategoryModel(parcel);
         }
-
         @Override
         public Object[] newArray(int i) {
             return new CategoryModel[i];

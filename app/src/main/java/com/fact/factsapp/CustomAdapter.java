@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +16,6 @@ import java.util.List;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CategoryViewHolder> {
 
     private List<CategoryModel> localCategorySet;
-
     private static OnItemClickListenerCategory itemClickListener;
 
     public CustomAdapter(List<CategoryModel> localCategorySet, OnItemClickListenerCategory itemClickListener) {
@@ -43,7 +41,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CategoryVi
     }
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
-
         private final TextView name;
         private final ImageView image;
         private final LinearLayout layout;
@@ -59,11 +56,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CategoryVi
 
         public void bind(CategoryModel item) {
             name.setText(item.getName());
-
-            // Integer imageId = item.getImageId();
-            //if (imageId != null) {
             image.setImageDrawable(ContextCompat.getDrawable(image.getContext(), item.getImageId()));
-            // }
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

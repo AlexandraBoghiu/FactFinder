@@ -3,7 +3,6 @@ package com.fact.factsapp;
 import android.os.AsyncTask;
 
 public class FindUserOperationLogin extends AsyncTask<String, Void, User> {
-
     UserOperations listener;
 
     public FindUserOperationLogin(UserOperations listener) {

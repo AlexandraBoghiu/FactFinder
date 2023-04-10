@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 public class ProfileFragment extends Fragment {
-
     private SharedPreferences sharedPreferences;
     private TextView nameTextView;
 

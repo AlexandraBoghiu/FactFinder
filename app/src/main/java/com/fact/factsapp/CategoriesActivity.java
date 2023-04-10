@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -45,7 +44,6 @@ public class CategoriesActivity extends AppCompatActivity implements BottomNavig
     }
 
     private boolean loadClientFragment(Fragment fragment) {
-
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commit();
             return true;

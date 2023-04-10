@@ -19,7 +19,11 @@ public class FirstFragment extends Fragment implements OnItemClickListenerCatego
     public static List<CategoryModel> categoryModelList = new ArrayList<>();
     public static String CATEGORY_NAME = "category_name";
     public static String CATEGORY = "category";
-    public FirstFragment() { super(R.layout.fragment_category_display);}
+
+    public FirstFragment() {
+        super(R.layout.fragment_category_display);
+    }
+
     @Override
     public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -30,7 +34,8 @@ public class FirstFragment extends Fragment implements OnItemClickListenerCatego
         RecyclerView rv = view.findViewById(R.id.recycler_view);
         rv.setAdapter(adapter);
     }
-    private void initializeList(){
+
+    private void initializeList() {
         categoryModelList.clear();
         categoryModelList.add(new CategoryModel("Cats", R.drawable.cat));
         categoryModelList.add(new CategoryModel("Dogs", R.drawable.dog));
@@ -53,7 +58,6 @@ public class FirstFragment extends Fragment implements OnItemClickListenerCatego
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.frame_container, secondFragment).addToBackStack(null);
-//        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment).commit();
         fragmentTransaction.commit();
     }
 

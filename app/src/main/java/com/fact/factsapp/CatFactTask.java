@@ -2,8 +2,6 @@ package com.fact.factsapp;
 
 import android.os.AsyncTask;
 
-import com.fact.factsapp.CatFactService;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

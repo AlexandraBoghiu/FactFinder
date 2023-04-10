@@ -14,18 +14,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -38,7 +32,6 @@ public class SecondFragment extends Fragment {
 
     private Button notificationButton;
     private static String NOTIFICATION_CHANNEL_ID = "Notif channel";
-
     private View view;
 
     public SecondFragment() {
@@ -82,6 +75,7 @@ public class SecondFragment extends Fragment {
                             addNotification(catFact);
                         }
                     }
+
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         t.printStackTrace();

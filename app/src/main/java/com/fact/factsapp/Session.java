@@ -2,14 +2,11 @@ package com.fact.factsapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
-
 
 public class Session {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private final String SESSION_KEY = "session";
-
     private static Session instance = null;
 
     private Session(Context context) {

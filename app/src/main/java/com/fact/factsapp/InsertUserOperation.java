@@ -3,7 +3,6 @@ package com.fact.factsapp;
 import android.os.AsyncTask;
 
 public class InsertUserOperation extends AsyncTask<User, Void, String> {
-
     UserOperations listener;
 
     public InsertUserOperation(UserOperations listener) {
