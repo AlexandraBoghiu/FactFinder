@@ -6,12 +6,17 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -33,6 +38,7 @@ public class SecondFragment extends Fragment {
     private Button notificationButton;
     private static String NOTIFICATION_CHANNEL_ID = "Notif channel";
     private View view;
+    private VideoView videoView;
 
     public SecondFragment() {
         super(R.layout.fragment_second);
@@ -43,6 +49,23 @@ public class SecondFragment extends Fragment {
         this.view = view;
         createNotificationChannel();
         getFact();
+        VideoView videoView = view.findViewById(R.id.videoView);
+
+        MediaController mediaController = new MediaController(getContext());
+        mediaController.setAnchorView(videoView);
+
+        Uri uri = Uri.parse("android.resource://" + requireActivity().getPackageName() + "/" + R.raw.catdoorbell);
+
+        videoView.setMediaController(mediaController);
+        videoView.setVideoURI(uri);
+        videoView.requestFocus();
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            public void onPrepared(MediaPlayer mp) {
+                mp.setVolume(1.0f, 1.0f);
+                videoView.start();
+            }
+        });
+
         notificationButton = view.findViewById(R.id.btn);
         notificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +74,7 @@ public class SecondFragment extends Fragment {
             }
         });
     }
+
 
     private void getFact() {
         Bundle bundle = this.getArguments();
@@ -102,7 +126,7 @@ public class SecondFragment extends Fragment {
         int id = 1;
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), NOTIFICATION_CHANNEL_ID).setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("FactsApp").setContentText(fact).setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent).setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+                .setContentIntent(pendingIntent).setSound(null);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
         notificationManagerCompat.notify(id, builder.build());
@@ -117,4 +141,6 @@ public class SecondFragment extends Fragment {
             notificationManagerCompat.createNotificationChannel(channel);
         }
     }
+
+
 }
