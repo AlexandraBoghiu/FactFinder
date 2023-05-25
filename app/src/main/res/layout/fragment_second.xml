@@ -4,14 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <TextView
         android:id="@+id/title"
         android:layout_width="359dp"
-        android:layout_height="138dp"
+        android:layout_height="198dp"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
         android:text="@string/loading"
         android:textSize="25sp" />
+
 
     <VideoView
         android:id="@+id/videoView"
@@ -28,3 +30,4 @@
         android:text="@string/give_me_another_fact" />
 
 </LinearLayout>
+
